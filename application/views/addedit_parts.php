@@ -169,7 +169,7 @@
                                                 <input type="hidden" name="randon_token[]" value="<?= $partsData->ID ?>" class="randon_token">
                                                 <div class="col-sm-3">
                                                     <?php if($partsData->image!=""){ ?>
-                                                        <img src="<?= $this->config->item('PARTS_DATA_DISP').'colors/'.$ID.'/'.$partsData->image ?>" alt="Color image" class="color_partimg" style="height: 200px; width: 200px;">
+                                                        <img src="<?= 'https://'.$this->config->item('BUCKETNAME').'.'.$this->config->item('REGION').'.'.$this->config->item('HOST').'/'.$partsData->image ?>" alt="Color image" class="color_partimg" style="height: 200px; width: 200px;">
                                                     <?php } ?>
                                                     <input type="hidden" name="color_image[]" value="<?= $partsData->image ?>" class="color_imageval">
                                                     <input type="file" name="color_image[]" class="color_image" value="" <?php if($partsData->image!=""){ echo 'style="display: none;"'; }?> onchange="ValidateImage(this);">

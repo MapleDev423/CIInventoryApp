@@ -358,7 +358,7 @@ class Parts_model extends CI_Model {
                         $image='';
                        
                         if($_FILES['color_image'] && isset($_FILES['color_image']['name'][$key]) &&  $_FILES['color_image']['name'][$key]!=''){
-                            
+                            /*
                               $dest_color = $this->config->item('PARTS_DATA_DIR')."colors/".$ROWID.'/'; 
 
                               $image_upload=time().'_'.$_FILES['color_image']['name'][$key];
@@ -378,42 +378,42 @@ class Parts_model extends CI_Model {
                                  $height = $size[1];
                                 
                                  if($width>=600 && $height>=600){
-                                //determine what the file extension of the source
-                                //image is
-                                switch($extension)
-                                {
+                                    //determine what the file extension of the source
+                                    //image is
+                                    switch($extension)
+                                    {
 
-                                        //its a gif
-                                        case 'gif': case 'GIF':
-                                                //create a gif from the source
-                                                $sourceImage = imagecreatefromgif($target_file);
-                                                break;
-                                        case 'jpg': case 'JPG': case 'jpeg':
-                                                //create a jpg from the source
-                                                $sourceImage = imagecreatefromjpeg($target_file);
-                                                break;
-                                        case 'png': case 'PNG':
-                                                //create a png from the source
-                                                $sourceImage = imagecreatefrompng($target_file);
-                                                break;
+                                            //its a gif
+                                            case 'gif': case 'GIF':
+                                                    //create a gif from the source
+                                                    $sourceImage = imagecreatefromgif($target_file);
+                                                    break;
+                                            case 'jpg': case 'JPG': case 'jpeg':
+                                                    //create a jpg from the source
+                                                    $sourceImage = imagecreatefromjpeg($target_file);
+                                                    break;
+                                            case 'png': case 'PNG':
+                                                    //create a png from the source
+                                                    $sourceImage = imagecreatefrompng($target_file);
+                                                    break;
 
-                                }
+                                    }
 
-                                
-                                // define new width / height
-                                $percentage = 20;
- 
-                                // define new width / height
-                                $newWidth = $width / 100 * $percentage;
-                                $newHeight = $height / 100 * $percentage;
+                                    
+                                    // define new width / height
+                                    $percentage = 20;
+    
+                                    // define new width / height
+                                    $newWidth = $width / 100 * $percentage;
+                                    $newHeight = $height / 100 * $percentage;
 
-                                // create a new image
-                                $destinationImage = imagecreatetruecolor($newWidth, $newHeight);
+                                    // create a new image
+                                    $destinationImage = imagecreatetruecolor($newWidth, $newHeight);
 
-                                // copy resampled
-                                imagecopyresampled($destinationImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-                                $dest=$dest_color.$image_upload;
-                                imagejpeg($destinationImage,$dest,100);
+                                    // copy resampled
+                                    imagecopyresampled($destinationImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+                                    $dest=$dest_color.$image_upload;
+                                    imagejpeg($destinationImage,$dest,100);
                                  }
                                  else{
                                     $destinationImage=$target_file; 
@@ -423,7 +423,9 @@ class Parts_model extends CI_Model {
                                 }
                                 $image = $image_upload;
                             }
-
+                            */
+                            $colorUpload = uploadColorImgToBucket($ROWID,$key);
+                            $image = $colorUpload['upload_data']['file_name'];
                         }
                         else{
                             $image=$color_image[$key];
@@ -456,7 +458,7 @@ class Parts_model extends CI_Model {
                         $image='';
                        
                         if($_FILES['color_image'] && isset($_FILES['color_image']['name'][$key]) &&  $_FILES['color_image']['name'][$key]!=''){
-                            
+                            /*
                               $dest_color = $this->config->item('PARTS_DATA_DIR')."colors/".$ROWID.'/'; 
 
                               $image_upload=time().'_'.$_FILES['color_image']['name'][$key];
@@ -520,7 +522,9 @@ class Parts_model extends CI_Model {
                                 }
                                 $image = $image_upload;
                             }
-
+                            */
+                            $colorUpload = uploadColorImgToBucket($ROWID,$key);
+                            $image = $colorUpload['upload_data']['file_name'];
                         }
                         else{
                             $image=$color_image[$key];

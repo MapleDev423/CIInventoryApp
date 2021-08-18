@@ -99,8 +99,8 @@ else{
  	$db_nm="ffc_db";
 }
 
-/*
 
+/*
 if($_SERVER['HTTP_HOST']=='localhost'){
 	$host="localhost";
 	$user_name="root";
