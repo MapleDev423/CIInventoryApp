@@ -322,76 +322,80 @@
 			"ua_append" => "SociallyDev-Spaces-API/2",
 		]);
 		/** */
-		$new_name = $dest.time().'_'.$_FILES[$imgName]['name'];
-		$target_file = $_FILES[$imgName]['tmp_name'];
-		//$path_parts = pathinfo($new_name);
-		//$extension = $path_parts['extension'];
-		$extension = pathinfo($_FILES[$imgName]['name'], PATHINFO_EXTENSION);
+		if($_FILES[$imgName]['name'] != ''){
+			$new_name = $dest.time().'_'.$_FILES[$imgName]['name'];
+			$target_file = $_FILES[$imgName]['tmp_name'];
+			//$path_parts = pathinfo($new_name);
+			//$extension = $path_parts['extension'];
+			$extension = pathinfo($_FILES[$imgName]['name'], PATHINFO_EXTENSION);
 
-		$size = getimagesize($target_file);
+			$size = getimagesize($target_file);
 
-		//determine dimensions
-		$width = $size[0];
-		$height = $size[1];
-		
-		if($width>=600 && $height>=600){
-			//determine what the file extension of the source
-			//image is
-			switch($extension)
-			{
-				//its a gif
-				case 'gif': case 'GIF':
-						//create a gif from the source
-						$sourceImage = imagecreatefromgif($target_file);
-						break;
-				case 'jpg': case 'JPG': case 'jpeg':
-						//create a jpg from the source
-						$sourceImage = imagecreatefromjpeg($target_file);
-						break;
-				case 'png': case 'PNG':
-						//create a png from the source
-						$sourceImage = imagecreatefrompng($target_file);
-						break;
+			//determine dimensions
+			$width = $size[0];
+			$height = $size[1];
+			
+			if($width>=600 && $height>=600){
+				//determine what the file extension of the source
+				//image is
+				switch($extension)
+				{
+					//its a gif
+					case 'gif': case 'GIF':
+							//create a gif from the source
+							$sourceImage = imagecreatefromgif($target_file);
+							break;
+					case 'jpg': case 'JPG': case 'jpeg':
+							//create a jpg from the source
+							$sourceImage = imagecreatefromjpeg($target_file);
+							break;
+					case 'png': case 'PNG':
+							//create a png from the source
+							$sourceImage = imagecreatefrompng($target_file);
+							break;
+				}
+
+				
+				// define new width / height
+				$percentage = 20;
+
+				// define new width / height
+				$newWidth = $width / 100 * $percentage;
+				$newHeight = $height / 100 * $percentage;
+
+				// create a new image
+				$destinationImage = imagecreatetruecolor($newWidth, $newHeight);
+
+				// copy resampled
+				imagecopyresampled($destinationImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+				//$dest = $dest.$new_name;
+				imagejpeg($destinationImage,$target_file,100);
+			}
+			else{
+				$destinationImage=$target_file; 
+			}
+			if ($extension == "jpg" || $extension == "jpeg"){
+				correctImageOrientation($destinationImage);
 			}
 
-			
-			// define new width / height
-			$percentage = 20;
 
-			// define new width / height
-			$newWidth = $width / 100 * $percentage;
-			$newHeight = $height / 100 * $percentage;
 
-			// create a new image
-			$destinationImage = imagecreatetruecolor($newWidth, $newHeight);
-
-			// copy resampled
-			imagecopyresampled($destinationImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-			//$dest = $dest.$new_name;
-			imagejpeg($destinationImage,$target_file,100);
+			$s3Client->putObject(
+				[
+					'Bucket' => $bucketName,
+					'Key' => $new_name,
+	//				'SourceFile' => $_FILES[$imgName]['tmp_name'],
+					'SourceFile' => $target_file,
+					'ACL' => 'public-read'
+				]
+			);
+			return array('upload_data' => array(
+				'file_name' => "$new_name",
+				)
+			);
+		}else{
+			return false;
 		}
-		else{
-			$destinationImage=$target_file; 
-		}
-		if ($extension == "jpg" || $extension == "jpeg"){
-			correctImageOrientation($destinationImage);
-		}
-
-
-
-		$s3Client->putObject(
-			[
-				'Bucket' => $bucketName,
-				'Key' => $new_name,
-//				'SourceFile' => $_FILES[$imgName]['tmp_name'],
-				'SourceFile' => $target_file,
-				'ACL' => 'public-read'
-			]
-		);
-		return array('upload_data' => array(
-			'file_name' => "$new_name",
-			)
-		);
 	}
 	function uploadImg($imgName='',$dest='')
 	{

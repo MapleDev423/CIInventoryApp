@@ -52,13 +52,18 @@ class Employee_model extends CI_Model {
 
             if($postData['password']!='')$insertData['password']= md5($postData['password']);
             $dest = $this->config->item('EMPLOYEE_DATA_DIR');
-//            $uploadResult = uploadImg('profile_pic',$dest);
+			//var_dump($postData);
+			
+			var_dump($_FILES['profile_pic']['name']);
+            //$uploadResult = uploadImg('profile_pic',$dest);
             $uploadResult = updateImgToBucket('profile_pic',$dest);
+			//var_dump("ADDEDIT");
 
             if($uploadResult!==false){
+				//var_dump("HERE");
             	$oldfile_name= (isset($postData['profile_pic']))?$postData['profile_pic']:'';
               	$insertData['profile_pic']=$uploadResult['upload_data']['file_name'];
-//                if($oldfile_name!='')remove_uploaded_file($oldfile_name,$dest);
+              //  if($oldfile_name!='')remove_uploaded_file($oldfile_name,$dest);
                 if($oldfile_name!=''){
 					remove_uploaded_fileFromBucket($oldfile_name,$dest);
 				}
