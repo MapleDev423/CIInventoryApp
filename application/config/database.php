@@ -85,7 +85,7 @@ else{
 }
 */
 /**Mine */
-/*
+
 if($_SERVER['HTTP_HOST']=='localhost'){
 	$host="db-mysql-nyc3-66856-do-user-1560502-0.b.db.ondigitalocean.com";
 	$user_name="doadmin";
@@ -99,7 +99,8 @@ else{
  	$db_nm="ffc_db";
 }
 
-*/
+
+/*
 if($_SERVER['HTTP_HOST']=='localhost'){
 	$host="localhost";
 	$user_name="root";
@@ -112,7 +113,7 @@ else{
 	$password="";
  	$db_nm="ffc_db";
 }
-
+*/
 
 $active_group = 'default';
 $query_builder = TRUE;
