@@ -85,7 +85,7 @@ else{
 }
 */
 /**Mine */
-
+/*
 if($_SERVER['HTTP_HOST']=='localhost'){
 	$host="db-mysql-nyc3-66856-do-user-1560502-0.b.db.ondigitalocean.com";
 	$user_name="doadmin";
@@ -98,8 +98,19 @@ else{
 	$password="omyz55db81dcj91i";
  	$db_nm="ffc_db";
 }
-
-
+*/
+if($_SERVER['HTTP_HOST']=='localhost'){
+	$host="db-ffc-do-user-1560502-0.b.db.ondigitalocean.com";
+	$user_name="ffc-web";
+	$password="fquqduf6zpgz99xc";
+	$db_nm="admin_ffc";
+}
+else{
+  $host="db-ffc-do-user-1560502-0.b.db.ondigitalocean.com";
+	$user_name="ffc-web";
+	$password="fquqduf6zpgz99xc";
+ 	$db_nm="admin_ffc";
+}
 /*
 if($_SERVER['HTTP_HOST']=='localhost'){
 	$host="localhost";
