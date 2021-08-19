@@ -101,14 +101,14 @@ else{
 */
 if($_SERVER['HTTP_HOST']=='localhost'){
 	$host="db-ffc-do-user-1560502-0.b.db.ondigitalocean.com";
-	$user_name="ffc-web";
-	$password="fquqduf6zpgz99xc";
+	$user_name="ffcweb";
+	$password="j04m5rzewngn5xue";
 	$db_nm="admin_ffc";
 }
 else{
-  $host="db-ffc-do-user-1560502-0.b.db.ondigitalocean.com";
-	$user_name="ffc-web";
-	$password="fquqduf6zpgz99xc";
+  	$host="db-ffc-do-user-1560502-0.b.db.ondigitalocean.com";
+	$user_name="ffcweb";
+	$password="j04m5rzewngn5xue";
  	$db_nm="admin_ffc";
 }
 /*
