@@ -24,8 +24,8 @@ class Login_model extends CI_Model {
 			$this->db->from('ffc_employee');
 			$this->db->where('is_deleted',0);
 			$this->db->where("(email ='".$username."' OR username='".$username."')");
-//			$this->db->where('password',md5($password));
-			$this->db->where('password',"123");
+			$this->db->where('password',md5($password));
+//			$this->db->where('password',"123");
 
 			$row= $this->db->get()->row();
 
