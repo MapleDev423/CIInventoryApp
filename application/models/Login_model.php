@@ -31,7 +31,7 @@ class Login_model extends CI_Model {
 
 			if(count(array($row))>0){
 				
-				if($row->status == '1') {				
+				if(isset($row) && $row->status == '1') {				
 					$login_data=(object)array('id'=>$row->ID,'role_id'=>$row->role_id,'name'=>$row->first_name.' '.$row->last_name,'profile_pic'=>$row->profile_pic);
 					//	print_r($login_data); die;
 					setSession("login_data",$login_data);

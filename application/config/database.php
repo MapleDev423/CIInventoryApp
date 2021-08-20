@@ -126,8 +126,8 @@ else{
 	$password="";
  	$db_nm="ffc_db";
 }
-*/
 
+*/
 $active_group = 'default';
 $query_builder = TRUE;
 
