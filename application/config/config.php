@@ -33,7 +33,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   	$url .=$_SERVER['HTTP_HOST'].'/';
   }
 //$config['base_url'] = 'https://ci-inventory-app-y6fre.ondigitalocean.app/';
-$config['base_url'] = '';
+$config['base_url'] = 'https://ffc-purchasing-vi9dw.ondigitalocean.app/';
+
+//$config['base_url'] = '';
 
 
 /*
